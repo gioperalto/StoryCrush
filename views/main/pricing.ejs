@@ -1,0 +1,116 @@
+<!-- ******PRICE PLAN****** --> 
+<section id="price-plan" class="price-plan section">
+    <div class="container text-center">
+        <h2 class="title">30 day FREE Premium Member trial!</h2>
+        <p class="intro">Our pricing is simple and you can change your membership at any time. </p>
+        <div class="price-cols row">
+
+            <div class="item col-md-2 col-sm-2 col-xs-12">
+                <!--OFFSET 2-->
+            </div>
+
+            <div class="item col-md-4 col-sm-4 col-xs-12">
+                <h3 class="heading">Basic</h3>
+                <div class="content">
+                    <p class="price-figure"><span class="number">FREE</span>
+                    <ul class="list-unstyled feature-list">
+                        <li>Post comments</li>
+                        <li>Rate stories</li>
+                        <li>Personalized experience</li>
+                        <li>Read stories</li>
+                    </ul>
+                    <a class="btn btn-cta btn-cta-primary" href="#" data-toggle="modal" data-target="#signupModal">Sign Up <br /><span class="extra">30 day free Premium trial</span></a>
+                </div><!--//content-->
+            </div><!--//item--> 
+            
+            <div class="item col-md-4 col-sm-4 col-xs-12">
+                <h3 class="heading">Premium</h3>
+                <div class="content">
+                    <p class="price-figure"><span class="currency">$</span><span class="number">10</span><span class="unit">/month</span></p>
+                    <ul class="list-unstyled feature-list">
+                        <li>Everything Basic has</li>
+                        <li>Read premium stories</li>
+                        <li>Access to author's blogs</li>
+                        <li>Customizable profiles</li>
+                    </ul>
+                    <a class="btn btn-cta btn-cta-primary" href="#" data-toggle="modal" data-target="#signupModal">Sign Up <br /><span class="extra">30 day free  Premium trial</span></a>
+                </div><!--//content-->
+            </div><!--//item-->  
+
+        </div><!--//row-->
+    </div><!--//container-->
+</section><!--//price-plan-->
+
+<!-- SIGN UP MODAL -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form class="form" role="form">
+            <div class="modal-header" style="padding-left:20px; padding-right:20px;">
+                <h1 class="logo">
+                  <span class="logo-title">StoryCrush</span>
+                  <span class="small pull-right">Sign Up</span>
+                </h1>
+                <p>Get started with StoryCrush! We give you a free month as a Premium Member upon sign up, allowing you to read our premium stories that get frequently updated with high quality content.</p><!--//logo--> 
+            </div>
+            <hr>
+            <div class="modal-body">
+                
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">username</div>
+                            <input class="form-control" type="text" id="signupName" placeholder="username" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">email</div>
+                            <input class="form-control" type="email" id="signupEmail" placeholder="email" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">password</div>
+                            <input class="form-control" type="password" id="signupPassword" placeholder="password" required="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">password</div>
+                            <input class="form-control" type="password" id="signupConfirmPassword" placeholder="confirm password" required="">
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button id="signupButton" type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    $("#signupButton").click(function(){
+      var username = $("#signupName").val();
+      var email = $("#signupEmail").val();
+      var password = $("#signupPassword").val();
+      var confirmPassword = $("#signupConfirmPassword").val();
+      if (username && email && password) {
+          if (password === confirmPassword) {
+              $.post(
+                  '/signup',
+                  {username: username, email: email, password:password},
+                  function () {
+                      window.location = "/welcome";
+                  }
+              ).fail(function(res){
+                  alert("Error: " + res.getResponseHeader("error"));
+              });
+          } else {
+              alert("Passwords don't match");
+          }
+      } else {
+          alert("A username, email and password is required");
+      }
+    });
+</script>

@@ -1,0 +1,77 @@
+<section class="promo section" style="background-color:#444;">
+	<div class="row" style="margin: 0;">
+		<%if(publisher.status == 1){%>
+			<div class="intro col-xs-6">
+		        <h2 class="title">Get Started!</h2>
+		        <p class="summary">
+		            Creating a new story with StoryCrush is really simple. Click the button below to take the next step!
+		        </p>
+		        <a class="btn btn-cta btn-cta-secondary" href="/story/add">Create New Story</a>
+		    </div><!--//intro-->
+		    <div class="menu col-xs-5">
+				<h1>My Stories</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Story</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%for(var i=0; i < stories.length; i++) {
+							var qrsStory = stories[i].name;%>
+							<tr>
+								<td><img src="<%-stories[i].thumb%>" alt="<%-stories[i].name%>" width="40" height="40"></td>
+								<td class="valign"><a href="/story/edit?name=<%-qrsStory%>"><%-stories[i].name%></a></td>
+								<td class="valign"><%if(stories[i].status == 0){%>Update Images<%}else if(stories[i].status == 1){%>Not Submitted<%
+								}else if(stories[i].status == 2){%>Pending Approval<%}else if(stories[i].status == 3){%>Approved<%}%></td>
+								<td><%if(stories[i].status == 0){%><button href="#" class="btn btn-sm btn-danger" type="button">Delete</button><%}else if(stories[i].status == 1){%><button href="#" class="btn btn-sm btn-warning" type="button">Submit</button><%}%></td>
+							</tr>
+						<%}%>
+					</tbody>
+				</table>
+			</div>
+		<%}else{%>
+			<div class="intro col-xs-12">
+				<h2 class="title">You're Almost There</h2>
+		        <p class="summary">
+		            We are still waiting for your approval. How about reading some stories written by other publishers while you wait?
+		        </p>
+		        <a class="btn btn-cta btn-cta-primary" href="/find">Find Stories</a>
+		    </div>
+		<%}%>
+	</div>
+</section>
+<script>
+
+	// DELETES A STORY
+	$(".menu button.btn.btn-sm.btn-danger").click(function() {
+		var name = $(this).parent().prev().prev().text();
+
+		$.post(
+			'/story/delete',
+			{name: name}
+		).fail(function(res) {
+          alert("Error: " + res.getResponseHeader("error"));
+      	});
+
+      	$(this).parent().parent().fadeOut();
+	});
+
+	// SUBMITS A STORY FOR APPROVAL
+	$(".menu button.btn.btn-sm.btn-warning").click(function() {
+		var name = $(this).parent().prev().prev().text();
+
+		$.post(
+			'/story/submit',
+			{name: name},
+			function() {
+				window.location = "/publish";
+			}
+		).fail(function(res) {
+			alert("Error:" + res.getResponseHeader("error"));
+		});
+	});
+
+</script>

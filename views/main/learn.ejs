@@ -1,0 +1,64 @@
+<!-- ******PROMO****** --> 
+<section class="promo section" style="background-color:#444444;">
+    <!--Story 1-->
+    <div class="row marginless intro learn">
+
+        <div class="col-xs-6">            
+            <h2 class="title">
+                Stories Like Never Before
+            </h2>
+            <p class="summary">
+                StoryCrush places a large emphasis on quality, meaning all of the stories you read meet a golden standard.
+                You can find what you may be looking for by specifying a category, reading recommended stories or 
+                searching for a specific story.
+            </p>
+            <p class="summary">
+                All of our stories are original works by our StoryCrush publishers, meaning you can have a direct line
+                connecting you to the author of your favorite story. 
+            </p>
+            <a class="btn btn-cta btn-cta-primary" href="/find">Find Stories</a>
+        </div>
+        <div class="col-xs-6">
+            <h2 class="title">
+                Power To Publishers
+            </h2>
+            <p class="summary">
+                As a StoryCrush publisher, you have the opportunity to build a loving audience for each of you creations.
+                Our platform allows for a very personal connection between the creator and his/her readers through various
+                tools, such as our chat engine that allows StoryCrush publishers to talk with their fans in one place.
+            </p>
+            <p class="summary">
+                Each story you create has its own profile page with a short description and customizable background image.
+                Our "unique read" algorithm gives you a very accurate idea of how many reads your stories, and the chapters
+                in them, have. 
+            </p>
+            <a class="btn btn-cta btn-cta-primary" 
+            <%if(admin){%>data-toggle="modal" data-target="#discModal"<%}else if(user){%>href="/publisher/add"<%}else{%>href="#" data-toggle="modal" data-target="#loginModal"<%}%>>
+                Become A Publisher
+            </a>
+        </div> 
+    </div><!--//intro-->
+
+</section><!--//promo-->
+<!-- DISCLAIMER MODAL -->
+<div class="modal fade" id="discModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-body">
+              <div>
+                <h1 class="logo">
+                  <span class="logo-title">StoryCrush</span>
+                  <span class="small pull-right">Admin Policy</span>
+                </h1><!--//logo--> 
+                <hr>
+              </div>
+                <p>We are sorry to say, however an Admin is unable to become a Publisher!</p>
+                <p>If an Admin were also a Publisher, hypothetically they could approve their own stories. This allowance would
+                break the important balance we need in order to ensure a non-biased environment. As an Admin, your role upholds an
+                obligation to filer and approve of high quality content fairly.</p>
+                <p>We apologize for this inconvenience, and hope you can continue to respect our policies that allow you to perform your
+                job to your maximum ability.</p>
+          </div>
+      </div>
+    </div>
+</div>

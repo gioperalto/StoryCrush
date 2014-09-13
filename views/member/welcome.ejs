@@ -1,0 +1,15 @@
+<!-- ******PROMO****** --> 
+<section id="welcomeSection" class="promo section" style="display: none; background-color:#444444;">
+    <!--Story 1-->
+    <div class="container intro">
+        <h2 class="title">Welcome to StoryCrush, <%- user.username %>!</h2>
+        <p class="summary">
+            We deeply appreciate you using our platform, and we can't wait for you to start your StoryCrush adventure!
+        </p>
+    </div><!--//intro-->
+</section><!--//promo-->
+<script>
+    $("#welcomeSection").fadeIn(5000, function() {
+        window.location = "/home";
+    });
+</script>

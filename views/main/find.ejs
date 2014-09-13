@@ -1,0 +1,37 @@
+<!-- ******PROMO****** --> 
+<section class="promo section" style="background-color:#444444;">
+    <!--Story 1-->
+    <div class="container intro">
+        <h2 class="title">Find Stories</h2>
+        <p class="summary">
+            What type of story do you want to read?
+        </p>
+        <button class="btn btn-cta btn-cta-primary" href="#">Action</button> 
+        &nbsp;
+        <button class="btn btn-cta btn-cta-tertiary" href="#">Adventure</button>
+        &nbsp;
+        <button class="btn btn-cta btn-cta-primary" href="#">Romance</button>
+        &nbsp;
+        <button class="btn btn-cta btn-cta-tertiary" href="#">Comedy</button>
+        &nbsp;
+        <button class="btn btn-cta btn-cta-primary" href="#">Sci Fi</button>
+        &nbsp;
+        <button class="btn btn-cta btn-cta-tertiary" href="#">Horror</button>
+    </div><!--//intro-->
+</section><!--//promo-->
+<script type="text/javascript">
+    // SENDS A CATEGORY TO BE FILTERED
+    $(".container.intro button.btn.btn-cta").click(function() {
+        var category = $(this).text();
+
+        $.post(
+            '/filter',
+            {category: category},
+            function() {
+                window.location = "/stories";
+            }
+        ).fail(function(res) {
+          alert("Error: " + res.getResponseHeader("error"));
+        });
+    });
+</script>

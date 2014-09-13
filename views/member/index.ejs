@@ -1,0 +1,20 @@
+<!-- ******PROMO****** --> 
+<section class="promo section" style="background-color:#444444;">
+    <!--Story 1-->
+    <div class="container intro">
+        <h2 class="title">
+            <%- user.username %> 
+            <%if(publisher && publisher.status == 1){%>
+                <span class="small feature">Publisher</span>
+            <%}else if(admin){%>
+                <span class="small feature">Admin</span>
+            <%}%>
+        </h2>
+        <p class="summary">
+            You seem to be new to our service. Would you be interested in personalizing your account?
+        </p>
+        <a class="btn btn-cta btn-cta-primary" href="#">Personalize</a> 
+        &nbsp;
+        <a class="btn btn-cta btn-cta-tertiary" href="#">No Thanks</a>
+    </div><!--//intro-->
+</section><!--//promo-->

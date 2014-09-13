@@ -1,0 +1,79 @@
+<section class="promo section" style="background-color:#444;">
+	<div class="row" style="margin: 0;">
+		<div class="menu col-xs-5">
+	        <h1>Review Publishers</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Publisher Name</th>
+						<th>Type</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%for(var i=0; i < publishers.length; i++){%>
+						<tr>
+							<td><%-publishers[i].publishername%></td>
+							<td><%if(publishers[i].premium){%>Premium<%}else{%>Normal<%}%></td>
+							<td class="valign"><button type="button" class="btn btn-sm btn-success">Approve</button>&nbsp;<button type="button" class="btn btn-sm btn-danger">Decline</button></td>
+						</tr>
+					<%}%>
+				</tbody>
+			</table>
+	    </div>
+	    <div class="menu col-xs-6">
+			<h1>Review Stories</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Story</th>
+						<th>Publisher</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%for(var i=0; i < stories.length; i++) {%>
+						<tr>
+							<td><img src="<%-stories[i].thumb%>" alt="<%-stories[i].name%>" width="40" height="40"></td>
+							<td class="valign"><a href="/story/read?name=<%-stories[i].name%>"><%-stories[i].name%></a></td>
+							<td class="valign"><%-stories[i].publisher%></td>
+							<td class="valign"><button type="button" class="btn btn-sm btn-success">Approve</button>&nbsp;<button type="button" class="btn btn-sm btn-danger">Decline</button></td>
+						</tr>
+					<%}%>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</section>
+<script>
+
+	// APPROVES A STORY OR PUBLISHER
+	$(".menu button.btn.btn-sm.btn-success").click(function() {
+		var name = $(this).parent().prev().prev().text();
+
+		$.post(
+			'/admin/approve',
+			{name: name}
+		).fail(function(res) {
+          alert("Error: " + res.getResponseHeader("error"));
+      	});
+
+      	$(this).parent().parent().fadeOut();
+	});
+
+	// DECLINES A STORY OR PUBLISHER
+	$(".menu button.btn.btn-sm.btn-danger").click(function() {
+		var name = $(this).parent().prev().prev().text();
+
+		$.post(
+			'/admin/decline',
+			{name: name}
+		).fail(function(res) {
+			alert("Error:" + res.getResponseHeader("error"));
+		});
+
+		$(this).parent().parent().fadeOut();
+	});
+
+</script>

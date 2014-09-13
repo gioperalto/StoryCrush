@@ -1,0 +1,22 @@
+<!-- ******PROMO****** --> 
+<section class="promo section" style="background-color:#444444;">
+    <!--Story 1-->
+    <div class="container intro">
+        <h2 class="title">Stories You May Like</h2>
+        <a class="btn btn-cta btn-cta-primary" href="/find">Back</a>
+        <div class="row">
+            <%for(var i=0; i < stories.length; i++) {%>
+              <a href="/story/read?name=<%-stories[i].name%>">
+                <div class="col-xs-2">
+                  <div class="thumbnail animated fadeInUp delayp1">
+                    <img src="<%-stories[i].thumb%>" alt="<%-stories[i].name%>">
+                    <div class="caption">
+                      <h3><%-stories[i].name%></h3>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            <%}%>
+        </div>
+    </div><!--//intro-->
+</section><!--//promo-->

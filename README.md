@@ -1,0 +1,2 @@
+# StoryCrush
+### a Sails application

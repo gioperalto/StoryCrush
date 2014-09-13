@@ -1,0 +1,49 @@
+<section class="section promo" style="background-image: url('<%-story.full%>');">
+	<span class="raster"></span>
+	<div class="container intro overlay">
+		<h2 class="title"><%-story.name%> <span class="small category"><%-story.category%></span></h2>
+		<p class="summary"><%-story.description%></p>
+		<button type="button" id="startReadingButton" class="btn btn-cta btn-cta-primary">Start Reading</button> 
+       	&nbsp;
+        <%if(list){%>
+        	<strong><%-story.name%></strong> has been added to your List
+        <%}else if(user){%>
+        	<button type="button" id="addToListButton" class="btn btn-cta btn-cta-tertiary">Add to My List</button>
+        <%}%>
+	</div>
+</section>
+<script type="text/javascript">
+	// BEGINS READING STORY
+	// $("#startReadingButton").click(function() {
+	// 	var qrsName = $(this).parent().prev().prev().children().text();
+
+	// 	$.post(
+	// 		'/story/delete',
+	// 		{name: qrsName}
+	// 	).fail(function(res) {
+ //          alert("Error: " + res.getResponseHeader("error"));
+ //      	});
+
+ //      	$(this).parent().parent().fadeOut();
+	// });
+
+	// ADDS STORY TO USER'S LIST
+	<%if(user){%>
+		$("#addToListButton").click(function() {
+			var user_id = <%-user.id%>,
+			story_id = <%-story.id%>;
+
+			$.post(
+				'/list/create', {
+					user_id: user_id,
+					story_id: story_id
+				},
+				function() {
+					window.location = "/story/read?name=<%-story.name%>";
+				}
+			).fail(function(res) {
+				alert("Error:" + res.getResponseHeader("error"));
+			});
+		});
+	<%}%>
+</script>

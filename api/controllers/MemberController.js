@@ -19,6 +19,37 @@
 
  	index: function(req, res) {
  		if(req.session.user) {
+ 			// List.find({user_id: req.session.user.id})
+ 			// .done(function indexFindList(err, lst) {
+ 			// 	if(err) {
+ 			// 		// We set an error header here,
+			 //    	// which we access in the views an display in the alert call.
+			 //    	res.set('error', 'DB Error');
+			 //    	// The error object sent below is converted to JSON
+			 //    	res.send(500, { error: "DB Error" });
+ 			// 	} else if(lst) {
+ 			// 		Story.findById(lst.story_id)
+ 			// 		.done(function indexFindStories(error, list) {
+ 			// 			if(error) {
+ 			// 				// We set an error header here,
+			 //    			// which we access in the views an display in the alert call.
+			 //    			res.set('error', 'DB Error');
+			 //    			// The error object sent below is converted to JSON
+			 //    			res.send(500, { error: "DB Error" });
+ 			// 			} else if(list) {
+ 			// 				storyList.push(list);
+ 			// 			} else {
+ 			// 				res.set('error', 'Stories not Found');
+			 //      			res.send(404, { error: "Stories not Found"});
+ 			// 			}
+ 			// 		});
+ 			// 		res.send(storyList);
+ 			// 	} else {
+ 			// 		res.set('error', 'List not Found');
+			 //      	res.send(404, { error: "List not Found"});
+ 			// 	}
+ 			// });
+
 			res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin});
 		} else {
  			res.redirect('/');

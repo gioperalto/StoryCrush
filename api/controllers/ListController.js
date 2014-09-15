@@ -69,8 +69,8 @@ var ListController = {
 		    	// The error object sent below is converted to JSON
 		    	res.send(500, { error: "DB Error" });
 			} else if(lst) {
-				List.destroy({user_id: user_id, story_id: story_id}).
-				exec(function deleteDeleteList(error, list) {
+				List.destroy({user_id: user_id, story_id: story_id})
+				.exec(function deleteDeleteList(error, list) {
 					if(error) {
 						// Set the error header
 		        		res.set('error', 'DB Error');

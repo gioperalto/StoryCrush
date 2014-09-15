@@ -82,6 +82,7 @@ var PublisherController = {
             res.send(500, { error: "DB Error" });
           } else {
             // console.log(publisher);
+            req.session.publisher = publisher;
             res.send(publisher);
             res.redirect('/publish');
           }

@@ -10,11 +10,30 @@
                 <span class="small feature">Admin</span>
             <%}%>
         </h2>
-        <p class="summary">
-            You seem to be new to our service. Would you be interested in personalizing your account?
-        </p>
-        <a class="btn btn-cta btn-cta-primary" href="#">Personalize</a> 
-        &nbsp;
-        <a class="btn btn-cta btn-cta-tertiary" href="#">No Thanks</a>
+        <%if(true){%>
+            <p class="summary">
+                You seem to be new to our service. Would you be interested in personalizing your account?
+            </p>
+            <a class="btn btn-cta btn-cta-primary" href="/coming_soon">Personalize</a> 
+            &nbsp;
+            <a class="btn btn-cta btn-cta-tertiary" href="/coming_soon">No Thanks</a>
+        <%} else {%>
+        <p class="summary">Welcome back! Feel free to explore our selection of new stories in addition to some of your favorites.</p>
+        <h2 class="title">My List</h2>
+        <div class="row">
+            <%for(var i=0; i < list.length; i++) {%>
+              <a href="/story/read?name=<%-list[i].name%>">
+                <div class="col-xs-2">
+                  <div class="thumbnail animated fadeInUp delayp1">
+                    <img src="<%-list[i].thumb%>" alt="<%-list[i].name%>">
+                    <div class="caption">
+                      <h3><%-list[i].name%></h3>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            <%}%>
+        </div>
+        <%}%>
     </div><!--//intro-->
 </section><!--//promo-->

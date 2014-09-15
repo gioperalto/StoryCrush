@@ -27,6 +27,10 @@
  //      	$(this).parent().parent().fadeOut();
 	// });
 
+	$("#startReadingButton").click(function() {
+		window.location = "/coming_soon";
+	});
+
 	// ADDS STORY TO USER'S LIST
 	<%if(user){%>
 		$("#addToListButton").click(function() {

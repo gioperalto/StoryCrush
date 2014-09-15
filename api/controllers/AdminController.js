@@ -88,6 +88,7 @@ var AdminController = {
 					if(error) {
 						console.log('Publisher not approved!');
 					} else {
+						//TODO: Send emai to user, notifying them that their request was approved
 	    				// console.log(pub);
 						res.send(pub);
 					}
@@ -110,6 +111,7 @@ var AdminController = {
 	    			if(error) {
 	    				console.log('Story not approved!');
 	    			} else {
+						//TODO: Send emai to user, notifying them that their request was approved
 	    				// console.log(story);
 	    				res.send(story);
 	    			}
@@ -162,6 +164,7 @@ var AdminController = {
 	    			if(error) {
 	    				console.log('Story not declined!');
 	    			} else {
+						//TODO: Send emai to user, notifying them that their request was declined
 	    				// console.log(story);
 	    				res.send(story);
 	    			}

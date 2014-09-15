@@ -68,7 +68,7 @@ var MainController = {
 				},
 				limit: 60,
 				sort: 'createdAt DESC'
-			}).done(function storiesFindStories(err, strys) {
+			}).done(function filterFindStories(err, strys) {
 				if(err) {
 					// We set an error header here,
 			    	// which we access in the views an display in the alert call.

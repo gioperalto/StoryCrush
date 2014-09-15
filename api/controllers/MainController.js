@@ -45,6 +45,10 @@ var MainController = {
 		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, featured: featured});
 	},
 
+	coming_soon: function(req, res) {
+		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin});
+	},
+
 	learn: function(req, res) {
 		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin});
 	},

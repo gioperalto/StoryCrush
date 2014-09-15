@@ -38,6 +38,8 @@ module.exports.routes = {
 
   '/': 'MainController',
 
+  '/coming_soon': 'MainController.coming_soon',
+
   '/learn' : 'MainController.learn',
 
   '/find': 'MainController.find',

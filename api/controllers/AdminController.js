@@ -140,6 +140,7 @@ var AdminController = {
 	        			res.set('error', 'DB Error');
 	        			res.send(500, { error: "DB Error" });
 					} else {
+						//TODO: Send emai to user, notifying them that their request was declined
 						res.send(publisher);
 					}
 				});

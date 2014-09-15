@@ -145,64 +145,48 @@ var StoryController = {
 	// UPDATES STORY INFORMATION
 	update: function(req, res) {
 
-		//TODO: Handle file uploads
-
-		// var fs = require('fs');
-
 		var name 			= req.param('name'),
 			category 		= req.param('category'),
 			description		= req.param('description'),
-			full 			= req.param('full'),
-			thumb 			= req.param('thumb');
-
-		// 	var fullDir 		= '/images/uploads/full';
-		// var thumbDir 		= '/images/uploads/thumb';
-		// var savedName 		= name.replace(/\s+/g,"-") + '.jpg';
+			full 			= req.files.full,
+			thumb 			= req.files.thumb;
 
 
-		// fs.readFile(req.files.full.path, function (err, data) {
-		//   // ...
-		//   var newPath = fullDir + savedName;
-		//   fs.writeFile(newPath, data, function (err) {
-		//   	console.log('File successfully saved!');
-		//   });
-		// });
+		var savedName 		= name.replace(/\s+/g,"-");
 
-		// res.setTimeout(0);
+		var fullPath		= 'assets/images/uploads/full/' + savedName + full.path.substring(full.path.length - 4,full.path.length),
+			thumbPath		= 'assets/images/uploads/thumb/' + savedName + thumb.path.substring(thumb.path.length - 4,thumb.path.length);
 
 
+		var fs = require('fs');
 
-	 //    req.file('full')
-	 //    .upload({
+		// RENAME FULL IMAGE TO LOCAL DIRECTORY
+		if(full.name.trim() != '') {
+			fs.rename(
+				full.path,
+				fullPath,
+				function (err) {
+				  if (err) {
+				  	console.log(err);
+				  }
+				  console.log('File sucessfully uploaded.');
+				}
+			);
+		}
 
-	 //      // You can apply a file upload limit (in bytes)
-	 //      maxBytes: 1000000,
-	 //      dirname: fullDir,
-	 //      saveAs: savedName
-	      
-	 //    }, function whenDone(err, uploadedFiles) {
-	 //      if (err) return res.serverError(err);
-	 //      else return res.json({
-	 //        files: uploadedFiles,
-	 //        textParams: req.params.all()
-	 //      });
-	 //    });
-
-	    // req.file('thumb')
-	    // .upload({
-
-	    //   // You can apply a file upload limit (in bytes)
-	    //   // maxBytes: 1000000
-	    //   dirname: thumbDir,
-	    //   saveAs: savedName
-	      
-	    // }, function whenDone(err, uploadedFiles) {
-	    //   if (err) return res.serverError(err);
-	    //   else return res.json({
-	    //     files: uploadedFiles,
-	    //     textParams: req.params.all()
-	    //   });
-	    // });
+		// RENAME THUMB IMAGE TO LOCAL DIRECTORY
+		if(thumb.name.trim() != '') {
+			fs.rename(
+				thumb.path, 
+				thumbPath,
+				function (err) {
+				  if (err) {
+				  	console.log(err);
+				  }
+				  console.log('File sucessfully uploaded.');
+				}
+			);
+		}
 
 	    Story.findOneByName(name)
 	    .done(function updateFindStory(err, story) {
@@ -215,12 +199,9 @@ var StoryController = {
 	    	} else {
 	    		story.category = category;
 	    		story.status = 1;
-	    		if(full != null && full.trim() != '') {
-	    			story.full = full;
-	    		}
-	    		if(thumb != null && thumb.trim() != '') {
-	    			story.thumb = thumb;
-	    		}
+	    		story.full = fullPath.substring(6, fullPath.length);
+	    		story.thumb = thumbPath.substring(6,thumbPath.length);
+
 	    		if(description != null && description.trim() != '') {
 	    			story.description = description;
 	    		}

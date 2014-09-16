@@ -168,6 +168,29 @@
         </div>
       </div>
 
+      <!-- DISCLAIMER MODAL -->
+      <div class="modal fade" id="discModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div>
+                      <h1 class="logo">
+                        <span class="logo-title">StoryCrush</span>
+                        <span class="small pull-right">Admin Policy</span>
+                      </h1><!--//logo--> 
+                      <hr>
+                    </div>
+                      <p>We are sorry to say, however an Admin is unable to become a Publisher!</p>
+                      <p>If an Admin were also a Publisher, hypothetically they could approve their own stories. This allowance would
+                      break the important balance we need in order to ensure a non-biased environment. As an Admin, your role upholds an
+                      obligation to filer and approve of high quality content fairly.</p>
+                      <p>We apologize for this inconvenience, and hope you can continue to respect our policies that allow you to perform your
+                      job to your maximum ability.</p>
+                </div>
+            </div>
+          </div>
+      </div>
+
       <!-- ******FOOTER****** --> 
       <footer class="footer">
           <div class="footer-content">
@@ -177,7 +200,7 @@
                           <div class="footer-col-inner">
                               <h3 class="title">About Us</h3>
                               <p>Imagine being able to read unique, and high quality, stories the way they were meant to be seen. StoryCrush brings power to both the reader and the author. Our platform is designed in a way that our readers can fall in love with our content and our authors can easily deliver stories that shine. After encountering the StoryCrush experience, you'll fall in love.</p>
-                              <p><a class="more" href="/learn">Learn more <i class="fa fa-long-arrow-right"></i></a></p>
+                              <p><a class="more" <%if(admin){%>data-toggle="modal" data-target="#discModal"<%}else if(user){%>href="/publisher/add"<%}else{%>href="#" data-toggle="modal" data-target="#loginModal"<%}%>>Become A Publisher <i class="fa fa-long-arrow-right"></i></a></p>
                               
                           </div><!--//footer-col-inner-->
                       </div><!--//foooter-col-->

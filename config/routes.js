@@ -40,8 +40,6 @@ module.exports.routes = {
 
   '/coming_soon': 'MainController.coming_soon',
 
-  '/learn' : 'MainController.learn',
-
   '/find': 'MainController.find',
 
   '/filter' : 'MainController.filter',

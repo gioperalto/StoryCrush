@@ -6,7 +6,8 @@
 		<button type="button" id="startReadingButton" class="btn btn-cta btn-cta-primary">Start Reading</button> 
        	&nbsp;
         <%if(list){%>
-        	<strong><%-story.name%></strong> has been added to your List
+        	<strong><%-story.name%></strong> has been added to your List &nbsp;
+        	<button type="button" id="removeButton" class="btn btn-cta btn-cta-tertiary">Remove From My List</button>
         <%}else if(user){%>
         	<button type="button" id="addToListButton" class="btn btn-cta btn-cta-tertiary">Add to My List</button>
         <%}%>
@@ -49,5 +50,24 @@
 				alert("Error:" + res.getResponseHeader("error"));
 			});
 		});
+
+		$("#removeButton").click(function() {
+			var user_id = <%-user.id%>,
+			story_id = <%-story.id%>;
+
+			$.post(
+				'/list/delete', {
+					user_id: user_id,
+					story_id: story_id
+				},
+				function() {
+					window.location = "/story/read?name=<%-story.name%>";
+				}
+			).fail(function(res) {
+				alert("Error:" + res.getResponseHeader("error"));
+			});
+		});
 	<%}%>
+
+
 </script>

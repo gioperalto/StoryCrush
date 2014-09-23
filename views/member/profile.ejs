@@ -1,0 +1,98 @@
+<!-- ******PROMO****** --> 
+<section id="profile" class="promo section" style="background-color:#FFF;">
+    <!--Story 1-->
+    <div class="container intro">
+        <div class="row col-xs-12">
+            <h1>Your Account</h1>
+        </div>
+        <div class="row">
+            <div class="figure col-xs-12 col-md-3">
+                <a class="thumbnail">
+                    <img id="profile-picture" src="<%-user.picture%>" alt="Profile Picture">
+                </a>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="row">
+                    <h3>Username</h3>
+                    <h4><%-user.username%></h4>
+                </div>
+                <div class="row">
+                    <h3>Email</h3>
+                    <h4><%-user.email%></h4>
+                </div>
+                <div class="row">
+                    <h3>Membership Status</h3>
+                    <h4>Regular Member</h4> 
+                    <%if(!user.premium){%><h5><a href="">Upgrade to Premium?</a></h5><%}%>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-5">
+                <ul class="list-group">
+                    <li class="list-group-item head">Account Manager</li>
+                    <a href="" class="list-group-item">Change email</a>
+                    <a href="" class="list-group-item">Change password</a>
+                    <a href="" class="list-group-item">Upgrade account</a>
+                    <a href="/user/reset_picture" class="list-group-item">Reset picture to default</a>
+                </ul>
+                <button id="saveButton" class="btn btn-cta btn-cta-primary pull-right" style="display:none;">Save Changes</button>
+            </div>
+        </div>
+        <div class="row col-xs-12">
+            <h1>Update Your Profile Picture</h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile1.jpg" alt="Profile Picture 1">
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile2.jpg" alt="Profile Picture 2">
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile3.png" alt="Profile Picture 3">
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile4.jpg" alt="Profile Picture 4">
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile5.jpg" alt="Profile Picture 5">
+                </button>
+            </div>
+            <div class="col-xs-6 col-md-2">
+                <button type="button" class="thumbnail pictobutton">
+                    <img src="/images/profile/profile6.png" alt="Profile Picture 6">
+                </button>
+            </div>
+        </div>
+    </div><!--//intro-->
+</section><!--//promo-->
+
+<script type="text/javascript">
+    // HANDLES IMAGE CHANGE FUNCTIONALITY
+    $(".thumbnail.pictobutton").click(function() {
+        $("#profile-picture").attr('src',$(this).children().attr("src"));
+        $("#saveButton").show();
+    });
+
+    // SAVE IMAGE
+    $("#saveButton").click(function() {
+        var picture = $("#profile-picture").attr("src"); //TODO: Picture link
+        $.post(
+            '/user/update_picture',
+            {picture: picture},
+            function() {
+                location.reload();
+            }
+        ).fail(function(res) {
+                  alert("Error: " + res.getResponseHeader("error"));
+        });
+    });
+</script>

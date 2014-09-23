@@ -208,7 +208,7 @@ var StoryController = {
 
 	    		story.save(function(error) {
 	    			if(error) {
-	    				console.log('Story not saved!')
+	    				console.log('Story not saved!');
 	    			} else {
 	    				console.log(story);
 	    				res.send(story);

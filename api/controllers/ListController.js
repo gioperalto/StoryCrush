@@ -44,8 +44,8 @@ var ListController = {
 			        		res.set('error', 'DB Error');
 			        		res.send(500, { error: "DB Error" });
 						} else {
-							console.log('Item has been added to list!');
-							console.log(list);
+							// console.log('Item has been added to list!');
+							// console.log(list);
 							res.send(list);
 						}
 					});

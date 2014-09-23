@@ -1,4 +1,4 @@
-h3 {
+h3, h4, h5 {
 	padding-left: 5%;
 }
 
@@ -78,4 +78,21 @@ a.btn-cta-tertiary, .btn-cta-tertiary {
 	color: #fff;
 	padding-top: 30px;
 	padding-bottom: 30px;
+}
+
+#profile h1, h2, h3, h4, h5, h6 {
+	color:#444;
+}
+
+#profile .list-group {
+	padding-top: 20px;
+}
+
+#profile .list-group-item {
+	color: #444;
+}
+
+#profile ul.list-group li.list-group-item.head {
+	color: #fff;
+	background: #3498db;
 }

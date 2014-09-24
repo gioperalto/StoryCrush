@@ -143,17 +143,27 @@ var MainController = {
 		var password 		= req.param('password');
 
 		// FINDS ALL USERS
-		// User.find()
-		// .done(function(err,found) {
-		// 	if(err) {
-		// 		console.log("Error!");
-		// 	} else if(found) {
-		// 		console.log(found);
-		// 	}
-		// 	else {
-		// 		console.log("Nothing found!");
-		// 	}
-		// });
+		User.findOneByEmail('amarin-stoddart@acm.com')
+		.done(function(err,found) {
+			if(err) {
+				console.log("Error!");
+			} else if(found) {
+				console.log(found);
+				User.destroy({email: 'amarin-stoddart@acm.com'})
+				.exec(function deleteDeleteStory(error, user) {
+					if(error) {
+						// Set the error header
+	        			res.set('error', 'DB Error');
+	        			res.send(500, { error: "DB Error" });
+					} else {
+						res.send(user);
+					}
+				});
+			}
+			else {
+				console.log("Nothing found!");
+			}
+		});
 
 		// FINDS ALL PUBLISHERS
 		// Publisher.find()

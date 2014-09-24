@@ -131,6 +131,11 @@ var StoryController = {
 							}
 						});
 					}
+
+					//TODO: Load chapters
+
+					//TODO: Load related titles
+
 					res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: stry, list: list});
 				} else {
 					res.redirect('/find');

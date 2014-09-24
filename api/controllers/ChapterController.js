@@ -54,6 +54,10 @@ var ChapterController = {
 		//TODO: Implement logic
 	},
 
+	update: function(req, res) {
+		//TODO: Implement logic
+	}
+
 };
 
 module.exports = ChapterController;

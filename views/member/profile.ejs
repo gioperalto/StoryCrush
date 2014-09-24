@@ -29,8 +29,8 @@
             <div class="col-xs-12 col-md-5">
                 <ul class="list-group">
                     <li class="list-group-item head">Account Manager</li>
-                    <a href="" class="list-group-item">Change email</a>
-                    <a href="" class="list-group-item">Change password</a>
+                    <a href="" class="list-group-item" data-toggle="modal" data-target="#emailModal">Change email</a>
+                    <a href="" class="list-group-item" data-toggle="modal" data-target="#passwordModal">Change password</a>
                     <a href="" class="list-group-item">Upgrade account</a>
                     <a href="/user/reset_picture" class="list-group-item">Reset picture to default</a>
                 </ul>
@@ -75,6 +75,68 @@
     </div><!--//intro-->
 </section><!--//promo-->
 
+<!-- UPDATE EMAIL MODAL -->
+<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <form class="form" role="form" method="post" action="/user/update_email">
+              <div class="modal-body">
+                  <div>
+                    <h1 class="logo">
+                      <span class="logo-title">StoryCrush</span>
+                      <span class="small pull-right">Update Email</span>
+                    </h1><!--//logo--> 
+                    <hr>
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group">
+                          <div class="input-group-addon">email</div>
+                          <input class="form-control" type="email" name="email" value="<%-user.email%>" required="">
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Update Email</button>
+              </div>
+          </form>
+      </div>
+    </div>
+</div>
+
+<!-- UPDATE PASSWORD MODAL -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+          <form class="form" role="form" method="post" action="/user/update_password">
+              <div class="modal-body">
+                  <div>
+                    <h1 class="logo">
+                      <span class="logo-title">StoryCrush</span>
+                      <span class="small pull-right">Update Password</span>
+                    </h1><!--//logo--> 
+                    <hr>
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group">
+                          <div class="input-group-addon">password</div>
+                          <input class="form-control" type="password" name="password" id="password" placeholder="new password" required="">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="input-group">
+                          <div class="input-group-addon">password</div>
+                          <input class="form-control" type="password" id="confirmPassword" placeholder="confirm password" required="">
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" id="updatePassword" style="display: none;">Update Password</button>
+              </div>
+          </form>
+      </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     // HANDLES IMAGE CHANGE FUNCTIONALITY
     $(".thumbnail.pictobutton").click(function() {
@@ -84,7 +146,8 @@
 
     // SAVE IMAGE
     $("#saveButton").click(function() {
-        var picture = $("#profile-picture").attr("src"); //TODO: Picture link
+        var picture             = $("#profile-picture").attr("src");
+
         $.post(
             '/user/update_picture',
             {picture: picture},
@@ -94,5 +157,17 @@
         ).fail(function(res) {
                   alert("Error: " + res.getResponseHeader("error"));
         });
+    });
+
+    // CONFIRM PASSWORD JQUERY
+    $("#confirmPassword").keyup(function() {
+        var password            = $("#password").val(),
+            confirmPassword     = $("#confirmPassword").val();
+
+        if(password == confirmPassword) {
+            $("#updatePassword").show();
+        } else {
+            $("#updatePassword").hide();
+        }
     });
 </script>

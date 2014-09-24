@@ -143,17 +143,17 @@ var MainController = {
 		var password 		= req.param('password');
 
 		// FINDS ALL USERS
-		User.find()
-		.done(function(err,found) {
-			if(err) {
-				console.log("Error!");
-			} else if(found) {
-				console.log(found);
-			}
-			else {
-				console.log("Nothing found!");
-			}
-		});
+		// User.find()
+		// .done(function(err,found) {
+		// 	if(err) {
+		// 		console.log("Error!");
+		// 	} else if(found) {
+		// 		console.log(found);
+		// 	}
+		// 	else {
+		// 		console.log("Nothing found!");
+		// 	}
+		// });
 
 		// FINDS ALL PUBLISHERS
 		// Publisher.find()

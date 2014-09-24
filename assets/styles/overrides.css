@@ -2,6 +2,11 @@ h3, h4, h5 {
 	padding-left: 5%;
 }
 
+/***** ELEMENTS *****/
+.label.label-custom {
+	background-color: #6dbd63;
+}
+
 .promo-carousel {
 	min-height: 400px;
 }
@@ -38,7 +43,7 @@ h3, h4, h5 {
 }
 
 .overlay {
-	position: absolute;
+	position: inherit;
 }
 
 /* image raster */
@@ -80,6 +85,8 @@ a.btn-cta-tertiary, .btn-cta-tertiary {
 	padding-bottom: 30px;
 }
 
+/***** PROFILE CSS *****/
+
 #profile h1, h2, h3, h4, h5, h6 {
 	color:#444;
 }
@@ -95,4 +102,10 @@ a.btn-cta-tertiary, .btn-cta-tertiary {
 #profile ul.list-group li.list-group-item.head {
 	color: #fff;
 	background: #3498db;
+}
+
+/****** CHAPTER CSS *****/
+
+.chap-sm {
+	padding-bottom: 15px;
 }

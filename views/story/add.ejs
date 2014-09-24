@@ -1,6 +1,6 @@
 <!-- ******PROMO****** --> 
 <section class="section">
-    <form class="form" role="form">
+    <form class="form" role="form" method="post" action="/story/create">
       <div class="modal-body">
           <div>
             <h1 class="logo">
@@ -12,13 +12,13 @@
               <div class="form-group col-xs-6">
                   <div class="input-group">
                       <div class="input-group-addon">Name</div>
-                      <input class="form-control" type="text" id="name" placeholder="What's the name of your story?" required="">
+                      <input class="form-control" type="text" name="name" placeholder="What's the name of your story?" required="">
                   </div>
               </div>
               <div class="form-group col-xs-6">
                   <div class="input-group">
                       <div class="input-group-addon">Category</div>
-                      <select class="form-control" id="category">
+                      <select class="form-control" name="category">
                           <option>Action</option>
                           <option>Adventure</option>
                           <option>Romance</option>
@@ -32,7 +32,7 @@
           <div class="row">
               <div class="form-group col-xs-12">
                 <label for="exampleInputEmail1">Description</label>
-                <textarea class="form-control" rows="5" id="description" placeholder="Tell your readers about your story... A paragraph or two should suffice." required=""></textarea>
+                <textarea class="form-control" rows="5" name="description" placeholder="Tell your readers about your story... A paragraph or two should suffice." required=""></textarea>
               </div>
           </div>
 
@@ -45,18 +45,18 @@
 </section><!--//promo-->
 
 <script>
-    $("#saveButton").click(function(){
-          var name = $("#name").val();
-          var category = $("#category").val();
-          var description = $("#description").val();
-          $.post(
-              '/story/create',
-              {name: name, category: category, description: description},
-              function() {
-                  window.location = "/publish";
-              }
-          ).fail(function(res){
-              alert("Error: " + res.getResponseHeader("error"));
-          });
-      });
+    // $("#saveButton").click(function(){
+    //       var name = $("#name").val();
+    //       var category = $("#category").val();
+    //       var description = $("#description").val();
+    //       $.post(
+    //           '/story/create',
+    //           {name: name, category: category, description: description},
+    //           function() {
+    //               window.location = "/publish";
+    //           }
+    //       ).fail(function(res){
+    //           alert("Error: " + res.getResponseHeader("error"));
+    //       });
+    //   });
 </script>

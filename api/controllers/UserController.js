@@ -26,7 +26,28 @@ var UserController = {
 	},
 
 	update_email: function(req, res) {
+		var email 			= req.param('email');
 
+		User.findOneByEmail(email)
+		.done(function updateFindUser(err, usr) {
+			if(err) {
+				// We set an error header here,
+	    		// which we access in the views an display in the alert call.
+	    		res.set('error', 'DB Error');
+	    		// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+			} else {
+				usr.email = email;
+				req.session.user = usr;
+				usr.save(function(error) {
+					if(error) {
+						console.log('User not saved!');
+					} else {
+						res.send(usr);
+					}
+				})
+			};
+		});
 	},
 
 	update_password: function(req, res) {

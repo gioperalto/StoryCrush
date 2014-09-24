@@ -131,6 +131,7 @@ var MainController = {
 		      } else {
 		        req.session.user = user;
 		        res.send(user);
+		        res.redirect('/home');
 		      }
 		    });
 		  }

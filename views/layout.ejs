@@ -104,14 +104,16 @@
                                 <a data-toggle="dropdown" href="#">Stories<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                   <li><a href="/find">Read</a></li>
-                                  <li><a href="/publish">Publish</a></li>
+                                  <li><a href="/publish"><span class="label label-custom">Beta</span> Publish</a></li>
                                 </ul>
                               </li>
                             <%}else{%>
                               <li class="nav-item"><a href="/find">Stories</a></li>
                             <%}%>
+                            <%if(false){%>
                             <li class="nav-item"><a href="/coming_soon">Blog</a></li>
                             <li class="nav-item"><a href="/coming_soon">Contact</a></li>
+                            <%}%>
                             <%if(user){%>
                                 <li class="nav-item"><a href="/profile"><img src="<%- user.picture %>" height="25" width="25"></a></li>
                                 <li class="nav-item nav-item-cta last dropdown">
@@ -271,8 +273,6 @@
               ).fail(function(res){
                   alert("Error: " + res.getResponseHeader("error"));
               });
-          } else {
-              alert("An email and password is required");
           }
       });
 

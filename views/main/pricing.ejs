@@ -49,7 +49,7 @@
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-        <form class="form" role="form">
+        <form class="form" role="form" method="post" action="/signup">
             <div class="modal-header" style="padding-left:20px; padding-right:20px;">
                 <h1 class="logo">
                   <span class="logo-title">StoryCrush</span>
@@ -63,19 +63,19 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">username</div>
-                            <input class="form-control" type="text" id="signupName" placeholder="username" required="">
+                            <input class="form-control" type="text" name="username" placeholder="username" required="">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">email</div>
-                            <input class="form-control" type="email" id="signupEmail" placeholder="email" required="">
+                            <input class="form-control" type="email" name="email" placeholder="email" required="">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">password</div>
-                            <input class="form-control" type="password" id="signupPassword" placeholder="password" required="">
+                            <input class="form-control" type="password" name="password" id="signupPassword" placeholder="password" required="">
                         </div>
                     </div>
                     <div class="form-group">
@@ -86,7 +86,7 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button id="signupButton" type="button" class="btn btn-primary">Register</button>
+                <button id="signupButton" type="submit" class="btn btn-primary" style="display:none;">Register</button>
             </div>
         </form>
     </div>
@@ -94,27 +94,13 @@
 </div>
 
 <script type="text/javascript">
-    $("#signupButton").click(function(){
-      var username = $("#signupName").val();
-      var email = $("#signupEmail").val();
+    $("#signupConfirmPassword").keyup(function() {
       var password = $("#signupPassword").val();
       var confirmPassword = $("#signupConfirmPassword").val();
-      if (username && email && password) {
-          if (password === confirmPassword) {
-              $.post(
-                  '/signup',
-                  {username: username, email: email, password:password},
-                  function () {
-                      window.location = "/welcome";
-                  }
-              ).fail(function(res){
-                  alert("Error: " + res.getResponseHeader("error"));
-              });
-          } else {
-              alert("Passwords don't match");
-          }
+      if (password == confirmPassword) {
+         $("#signupButton").show();
       } else {
-          alert("A username, email and password is required");
+        $("#signupButton").hide();
       }
     });
 </script>

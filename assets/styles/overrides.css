@@ -38,6 +38,11 @@ h3, h4, h5 {
 	color: #FFD86B;
 }
 
+/***** NAVBAR *****/
+.navbar-fixed-top {
+	position: inherit;
+}
+
 .header .main-nav .nav .nav-item a {
 	text-align: right;
 }
@@ -69,7 +74,14 @@ h3, h4, h5 {
 
 a.btn-cta-tertiary, .btn-cta-tertiary {
 	background: #DB4537;
-	border: 2px solid #DB4537;
+	border: 2px solid #c0392b;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+a.btn-cta-blue, .btn-cta-blue {
+	background: #3498db;
+	border: 2px solid #2980b9;
 	color: #fff;
 	text-transform: uppercase;
 }
@@ -108,4 +120,8 @@ a.btn-cta-tertiary, .btn-cta-tertiary {
 
 .chap-sm {
 	padding-bottom: 15px;
+}
+
+.full-width {
+	max-width: inherit !important;
 }

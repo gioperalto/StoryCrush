@@ -41,7 +41,24 @@ var StoryController = {
 			    	res.set('error', 'DB Error');
 			    	// The error object sent below is converted to JSON
 				} else if(stry) {
-					res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: stry});
+					Chapter.findByStory_id(stry.id)
+					.done(function editFindChapters(error, chapters) {
+						if(error) {
+							// We set an error header here,
+			    			// which we access in the views an display in the alert call.
+			    			res.set('error', 'DB Error');
+			    			// The error object sent below is converted to JSON
+						} else if(chapters) {
+							var chapnums = [];
+							for(var i = 0; i < chapters.length; i++) {
+								chapnums.push(chapters[i].number);
+							}
+							res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: stry, chapters: chapters, chapnums: chapnums});
+						} else {
+							res.set('error', 'Chapter not Found');
+			      			res.send(404, { error: "Chapter not Found"});
+						}
+					});
 				} else {
 					res.set('error', 'Story not Found');
 			      	res.send(404, { error: "Story not Found"});
@@ -94,6 +111,7 @@ var StoryController = {
 			      } else {
 			      	// console.log(story);
 			        res.send(story);
+			        res.redirect('/publish');
 			      }
 				});
 			}
@@ -106,6 +124,7 @@ var StoryController = {
 
 		var name 			= req.query.name;
 		var list			= '';
+		var chapters 		= {};
 
 		Story.findOneByName(name)
 		.done(function readFindStory(err, stry) {
@@ -132,11 +151,24 @@ var StoryController = {
 						});
 					}
 
-					//TODO: Load chapters
+					Chapter.findByStory_id(stry.id)
+					.done(function editFindChapters(error, chaps) {
+						if(error) {
+							// We set an error header here,
+			    			// which we access in the views an display in the alert call.
+			    			res.set('error', 'DB Error');
+			    			// The error object sent below is converted to JSON
+						} else if(chaps) {
+							chapters = chaps;
+						} else {
+							res.set('error', 'Chapter not Found');
+			      			res.send(404, { error: "Chapter not Found"});
+						}
+					});
 
 					//TODO: Load related titles
 
-					res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: stry, list: list});
+					res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: stry, list: list, chapters: chapters});
 				} else {
 					res.redirect('/find');
 				}
@@ -287,6 +319,50 @@ var StoryController = {
 	    		});
 	    	}
 	    });
+	},
+
+	chapter: function(req, res) {
+		var story_id 		= req.query.story_id,
+			number 			= req.query.number,
+			chapter 		= {},
+			story 			= {};
+
+		Chapter.findOne({
+			story_id: story_id,
+			number: number
+		})
+		.done(function chapterFindChapter(err, chptr) {
+			if(err) {
+				// We set an error header here,
+	    		// which we access in the views an display in the alert call.
+	    		res.set('error', 'DB Error');
+	    		// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+			} else if(chptr) {
+				chapter = chptr;
+			} else {
+				res.set('error', 'Chapter not Found');
+	      		res.send(404, { error: "Chapter not found!"});
+			}
+		});
+
+		Story.findOneById(story_id)
+		.done(function chapterFindStory(err, stry) {
+			if(err) {
+				// We set an error header here,
+	    		// which we access in the views an display in the alert call.
+	    		res.set('error', 'DB Error');
+	    		// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+			} else if(stry) {
+				story = stry;
+			} else {
+				res.set('error', 'Story not Found');
+	      		res.send(404, { error: "Story not found!"});
+			}
+		});
+
+		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: story, chapter: chapter});
 	},
 
 };

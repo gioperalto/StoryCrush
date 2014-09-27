@@ -5,11 +5,35 @@
 		<p class="summary"><%-story.description%></p>
 		<a class="btn btn-cta btn-cta-primary" href="#" data-toggle="modal" data-target="#updateModal">Update Story</a>
 		&nbsp;
+		<a class="btn btn-cta btn-cta-blue" href="#" data-toggle="modal" data-target="#addModal">Add Chapter</a>
+		&nbsp;
 		<a class="btn btn-cta btn-cta-tertiary" href="/publish">Go Back</a>
-
+		<h2 class="title">Chapters</h2>
+		<div class="row chap-sm">
+			<%for(var i = 0; i < chapters.length; i++) {
+				if(chapters.length==1) {%>
+				<div class="col-xs-2">
+					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a> 
+				</div>
+			<%}else if(i==0){%>
+				<div class="col-xs-2">
+					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+			<%}else if(i==chapters.length-1){%>
+					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+				</div>
+			<%}else if(i%4==0){%>
+				</div> 
+				<div class="col-xs-2">
+					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+			
+			<%}else{%>
+				<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+			<%}
+			}%>
+		</div>
 	</div>
 </section>
-<!-- LOG IN MODAL -->
+<!-- UPDATE STORY MODAL -->
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
@@ -68,6 +92,54 @@
 	          </div>
 	          <div class="modal-footer">
 	              <button type="submit" class="btn btn-success">Save</button>
+	          </div>
+	      </form>
+	  </div>
+	</div>
+</div>
+<!-- ADD CHAPTER MODAL -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	      <form class="form" role="form" method="post" action="/chapter/create">
+	          <div class="modal-body">
+	              <div>
+	                <h1 class="logo">
+	                  <span class="logo-title">StoryCrush</span>
+	                  <span class="small pull-right">Add Chapter</span>
+	                </h1><!--//logo--> 
+	                <hr>
+	              </div>
+	              <div class="row">
+		              <div class="form-group col-xs-6">
+		                  <div class="form-group">
+		                      	<input type="hidden" name="storyName" value="<%-story.name%>">
+		                		<label for="name">Name</label>
+		                        <input class="form-control" type="text" name="chapterName" placeholder="Name of Chapter" required="">
+		                  </div>
+		              </div>
+		              <div class="form-group col-xs-6">
+		                  <div class="input-group">
+	                		  <label for="number">Number</label>
+		                      <select class="form-control" name="number">
+		                      	<%for(var i = 1; i <= 100; i++) {
+		                      		if(chapnums.indexOf(i) == -1){%>
+		                      	  		<option><%-i%></option>
+		                      		<%}
+	                      		}%>
+		                      </select>
+		                  </div>
+		              </div>
+		          </div>
+		          <div class="row">
+		              <div class="form-group col-xs-12">
+		                <label for="content">Content</label>
+		                <textarea class="form-control" rows="10" name="content" placeholder="Write the content for this chapter here." required=""></textarea>
+		              </div>
+		          </div>
+	          </div>
+	          <div class="modal-footer">
+	              <button type="submit" class="btn btn-primary">Add</button>
 	          </div>
 	      </form>
 	  </div>

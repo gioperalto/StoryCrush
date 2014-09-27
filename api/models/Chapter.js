@@ -10,8 +10,9 @@ module.exports = {
 
   attributes: {
   	
+  	number: 'STRING',
   	name: 'STRING',
-  	pages: 'ARRAY',
+  	content: 'STRING',
     story_id: {
       type: 'string',
       required: true,

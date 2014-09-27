@@ -179,6 +179,18 @@ var MainController = {
 		// 	}
 		// });
 
+		// FINDS ALL CHAPTERS
+		// Chapter.find()
+		// .done(function(err, found) {
+		// 	if(err) {
+		// 		console.log('Error!');
+		// 	} else if(found) {
+		// 		console.log(found);
+		// 	} else {
+		// 		console.log('Nothing found!');
+		// 	}
+		// });
+
 		// User.findByEmail(email)...
 		// In v0.9.0 the find method returns an empty array when no results are found
 		// when only one result is needed use findOne.

@@ -47,6 +47,12 @@ h3, h4, h5 {
 	text-align: right;
 }
 
+/***** PROMO SECTION *****/
+
+.promo .intro {
+	padding-bottom: 30px;
+}
+
 .overlay {
 	position: inherit;
 }

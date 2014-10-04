@@ -1,9 +1,13 @@
 <section class="section promo" style="background-image: url('<%-story.full%>');">
 	<span class="raster"></span>
 	<div class="container intro overlay">
-		<h2 class="title"><%-chapter.name%></h2>
+		<h2 class="title"><%-chapter.name%> <span class="small"><a href="/story/read?name=<%-story.name%>">CHAPTER <%-chapter.number%></a></span></h2>
 		<p class="summary full-width">
 			<%-chapter.content.replace(/\n/g,'</p><p class="summary full-width">')%>
 		</p>
+			<%if(chapter.number !== 1) {%>
+				<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapter.number - 1%>" class="btn btn-cta btn-cta-primary"><i class="fa fa-long-arrow-left"></i> Previous Chapter</a>
+			<%}%>
+			<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapter.number + 1%>" class="btn btn-cta btn-cta-primary pull-right">Next Chapter <i class="fa fa-long-arrow-right"></i></a>
 	</div>
 </section>

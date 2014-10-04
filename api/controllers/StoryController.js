@@ -173,8 +173,8 @@ var StoryController = {
 					res.redirect('/find');
 				}
 			} else {
-				res.set('error', 'Story not Found');
-		      	res.send(404, { error: "Story not Found"});
+				//TODO: Send to Story not found page
+	      		res.notFound();
 			}
 		});
 	},
@@ -327,6 +327,24 @@ var StoryController = {
 			chapter 		= {},
 			story 			= {};
 
+
+
+		Story.findOneById(story_id)
+		.done(function chapterFindStory(err, stry) {
+			if(err) {
+				// We set an error header here,
+	    		// which we access in the views an display in the alert call.
+	    		res.set('error', 'DB Error');
+	    		// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+			} else if(stry) {
+				story = stry;
+			} else {
+				//TODO: Send to Story not found page
+	      		res.notFound();
+			}
+		});
+
 		Chapter.findOne({
 			story_id: story_id,
 			number: number
@@ -340,29 +358,12 @@ var StoryController = {
 	    		res.send(500, { error: "DB Error" });
 			} else if(chptr) {
 				chapter = chptr;
+				res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: story, chapter: chapter});
 			} else {
-				res.set('error', 'Chapter not Found');
-	      		res.send(404, { error: "Chapter not found!"});
+				//TODO: Send to Story not found page
+	      		res.notFound();
 			}
 		});
-
-		Story.findOneById(story_id)
-		.done(function chapterFindStory(err, stry) {
-			if(err) {
-				// We set an error header here,
-	    		// which we access in the views an display in the alert call.
-	    		res.set('error', 'DB Error');
-	    		// The error object sent below is converted to JSON
-	    		res.send(500, { error: "DB Error" });
-			} else if(stry) {
-				story = stry;
-			} else {
-				res.set('error', 'Story not Found');
-	      		res.send(404, { error: "Story not found!"});
-			}
-		});
-
-		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: story, chapter: chapter});
 	},
 
 };

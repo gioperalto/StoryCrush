@@ -190,7 +190,7 @@ var MainController = {
 		// 		console.log('Nothing found!');
 		// 	}
 		// });
-
+		
 		// User.findByEmail(email)...
 		// In v0.9.0 the find method returns an empty array when no results are found
 		// when only one result is needed use findOne.

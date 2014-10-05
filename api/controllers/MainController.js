@@ -92,6 +92,10 @@ var MainController = {
 		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin});
 	},
 
+	learn: function(req, res) {
+		res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin});
+	},
+
 	signup: function (req, res) {
 		var username 		= req.param('username');
 		var email 			= req.param('email');

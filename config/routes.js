@@ -46,11 +46,13 @@ module.exports.routes = {
 
   '/stories' : 'MainController.stories',
 
-  '/pricing': 'MainController.pricing',
+  '/pricing' : 'MainController.pricing',
 
-  '/signup': 'MainController.signup',
+  '/learn' : 'MainController.learn',
 
-  '/login': 'MainController.login',
+  '/signup' : 'MainController.signup',
+
+  '/login' : 'MainController.login',
 
   /****** MEMBER CONTROLLER *****/
 

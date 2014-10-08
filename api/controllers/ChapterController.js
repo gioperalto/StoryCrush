@@ -53,29 +53,122 @@ var ChapterController = {
 	},
 
 	read: function(req, res) {
-		//TODO: Implement logic
+		if(req.session.publisher && req.session.publisher.status == 1) {
+			var story_id 		= req.query.story_id,
+				number 			= req.query.number,
+				chapter 		= {},
+				story 			= {};
+
+
+
+			Story.findOneById(story_id)
+			.done(function chapterFindStory(err, stry) {
+				if(err) {
+					// We set an error header here,
+		    		// which we access in the views an display in the alert call.
+		    		res.set('error', 'DB Error');
+		    		// The error object sent below is converted to JSON
+		    		res.send(500, { error: "DB Error" });
+				} else if(stry) {
+					story = stry;
+				} else {
+					//TODO: Send to Story not found page
+		      		res.notFound();
+				}
+			});
+
+			Chapter.findOne({
+				story_id: story_id,
+				number: number
+			})
+			.done(function chapterFindChapter(err, chptr) {
+				if(err) {
+					// We set an error header here,
+		    		// which we access in the views an display in the alert call.
+		    		res.set('error', 'DB Error');
+		    		// The error object sent below is converted to JSON
+		    		res.send(500, { error: "DB Error" });
+				} else if(chptr) {
+					chapter = chptr;
+					res.view({user: req.session.user, publisher: req.session.publisher, admin: req.session.admin, story: story, chapter: chapter});
+				} else {
+					//TODO: Send to Story not found page
+		      		res.notFound();
+				}
+			});
+		} else {
+			res.redirect('/find');
+		}
 	},
 
 	update: function(req, res) {
-		//TODO: Implement logic
+		var storyId 		= req.param('storyId'),
+			chapterId 		= req.param('chapterId'),
+			name 			= req.param('storyName'),
+			content 		= req.param('content');
+
+		Chapter.findOne({
+			story_id: storyId,
+			id: chapterId
+		}).done(function updateFindChapter(err, chptr) {
+			if(err) {
+				// We set an error header here,
+	    		// which we access in the views an display in the alert call.
+	    		res.set('error', 'DB Error');
+	    		// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+			} else if(chptr) {
+				chptr.name = name;
+				chptr.content = content;
+
+				chptr.save(function(error) {
+	    			if(error) {
+	    				console.log('Chapter not saved!');
+	    			} else {
+	    				console.log(chptr);
+	    				res.send(chptr);
+	    				res.redirect('/chapter/read?story_id=' + storyId + '&number=' + chptr.number);
+	    			}
+	    		});
+			}
+		});
 	},
 
 	delete: function(req, res) {
-		// DELETE ALL CHAPTERS
-		// Chapter.find()
-		// .done(function deleteShit(err, chptrs) {
-		// 	Chapter.destroy()
-		// 	.exec(function (error, chapters) {
-		// 		if(error) {
-		// 			console.log('Error deleting!');
-		// 		} else {
-		// 			console.log('Chapters deleted!');
-		// 			res.send(chapters);
-		// 		}
-		// 	})
-		// });
 
-		
+		if(req.session.publisher && req.session.publisher.status == 1) {
+			var id 			= req.param('storyId'),
+				name 		= req.param('name'),
+				number 		= req.param('number');
+
+			Chapter.findOne({
+				story_id: id,
+				number: number
+			}).done(function deleteFindChapter(err, chptr) {
+				if(err) {
+					// We set an error header here,
+	    			// which we access in the views an display in the alert call.
+	    			res.set('error', 'DB Error');
+	    			// The error object sent below is converted to JSON
+	    		res.send(500, { error: "DB Error" });
+				} else if(chptr) {
+					Chapter.destroy({
+						story_id: id,
+						number: number
+					}).exec(function (err) {
+						if(err) {
+							console.log('Story not created!');
+						} else {
+							res.redirect('/story/edit?name=' + name);
+						}
+					});
+				} else {
+
+				}
+			});
+		} else {
+			res.redirect('/find');
+		}
 	},
 
 };

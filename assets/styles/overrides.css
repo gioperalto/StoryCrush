@@ -49,6 +49,10 @@ h3, h4, h5 {
 	padding-bottom: 30px;
 }
 
+.promo .intro .title {
+	max-width: inherit;
+}
+
 .overlay {
 	position: inherit;
 }
@@ -74,6 +78,7 @@ h3, h4, h5 {
 	opacity: 0.8;
 }
 
+/***** RED BUTTON *****/
 a.btn-cta-tertiary, .btn-cta-tertiary {
 	background: #DB4537;
 	border: 2px solid #c0392b;
@@ -81,9 +86,17 @@ a.btn-cta-tertiary, .btn-cta-tertiary {
 	text-transform: uppercase;
 }
 
+/***** BLUE BUTTON *****/
 a.btn-cta-blue, .btn-cta-blue {
 	background: #3498db;
 	border: 2px solid #2980b9;
+	color: #fff;
+	text-transform: uppercase;
+}
+
+a.btn-cta-carrot, .btn-cta-carrot {
+	background: #e67e22;
+	border: 2px solid #d35400;
 	color: #fff;
 	text-transform: uppercase;
 }

@@ -7,27 +7,28 @@
 		&nbsp;
 		<a class="btn btn-cta btn-cta-blue" href="#" data-toggle="modal" data-target="#addModal">Add Chapter</a>
 		&nbsp;
-		<a class="btn btn-cta btn-cta-tertiary" href="/publish">Go Back</a>
+		<a class="btn btn-cta btn-cta-carrot" href="/publish">Go Back</a>
+		<a type="button" class="btn btn-cta-tertiary pull-right" data-toggle="modal" data-target="#deleteModal">Delete</a>
 		<h2 class="title">Chapters</h2>
 		<div class="row chap-sm">
 			<%for(var i = 0; i < chapters.length; i++) {
 				if(chapters.length==1) {%>
 				<div class="col-xs-2">
-					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a> 
+					<a href="/chapter/read?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a> 
 				</div>
 			<%}else if(i==0){%>
 				<div class="col-xs-2">
-					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+					<a href="/chapter/read?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
 			<%}else if(i==chapters.length-1){%>
-					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+					<a href="/chapter/read?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
 				</div>
 			<%}else if(i%4==0){%>
 				</div> 
 				<div class="col-xs-2">
-					<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+					<a href="/chapter/read?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
 			
 			<%}else{%>
-				<a href="/story/chapter?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
+				<a href="/chapter/read?story_id=<%-story.id%>&number=<%-chapters[i].number%>"><%-chapters[i].number%>. <%-chapters[i].name%></a><br>
 			<%}
 			}%>
 		</div>
@@ -144,4 +145,30 @@
 	      </form>
 	  </div>
 	</div>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	      <form class="form" role="form" method="post" action="/story/delete">
+	          <div class="modal-body">
+	              <div>
+	                <h1 class="logo">
+	                  <span class="logo-title">StoryCrush</span>
+	                  <span class="small pull-right">Delete Story</span>
+	                </h1><!--//logo--> 
+	                <hr>
+	              </div>
+	              <div class="row">
+	              	<h3>Are you sure you want to delete this story?</h3>
+                  	<input type="hidden" name="name" value="<%-story.name%>">
+	              </div>
+	          </div>
+              <div class="modal-footer">
+              	<button type="button" class="btn btn-cta btn-cta-tertiary pull-left" data-dismiss="modal">No</button>
+				<button type="submit" class="btn btn-cta-primary pull-right">Yes</button>
+              </div>
+          </form>
+      </div>
+  	</div>
 </div>

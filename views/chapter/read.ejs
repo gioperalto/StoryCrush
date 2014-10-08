@@ -1,0 +1,79 @@
+<section class="section promo" style="background-image: url('<%-story.full%>');">
+	<span class="raster"></span>
+	<div class="container intro overlay">
+		<h2 class="title"><%-chapter.name%> 
+			<span class="small"><a href="/story/read?name=<%-story.name%>">CHAPTER <%-chapter.number%></a></span>
+			<a type="button" href="#" class="btn btn-cta btn-cta-blue" data-toggle="modal" data-target="#updateModal">Update Chapter</a>
+			<a href="/story/edit?name=<%-story.name%>" type="button" class="btn btn-cta btn-cta-carrot">Go Back</a>
+			<a href="#" type="button" class="btn btn-cta-tertiary pull-right" data-toggle="modal" data-target="#deleteModal">Delete</a>
+		</h2>
+		<p class="summary full-width">
+			<%-chapter.content.replace(/\n/g,'</p><p class="summary full-width">')%>
+		</p>
+	</div>
+</section>
+<!-- UPDATE STORY MODAL -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	      <form class="form" role="form" method="post" action="/chapter/update">
+	          <div class="modal-body">
+	              <div>
+	                <h1 class="logo">
+	                  <span class="logo-title">StoryCrush</span>
+	                  <span class="small pull-right">Update Chapter</span>
+	                </h1><!--//logo--> 
+	                <hr>
+	              </div>
+	              <div class="row">
+		              <div class="form-group col-xs-6">
+		                  <div class="input-group">
+		                      <div class="input-group-addon">Name</div>
+		                      <input type="text" class="form-control" name="storyName" value="<%-story.name%>" required="">
+		                      <input type="hidden" name="storyId" value="<%-story.id%>">
+		                      <input type="hidden" name="chapterId" value="<%-chapter.id%>">
+		                  </div>
+		              </div>
+		          </div>
+		          <div class="row">
+		              <div class="form-group col-xs-12">
+		                <label for="description">Content</label>
+		                <textarea class="form-control" rows="12" name="content"><%-chapter.content%></textarea>
+		              </div>
+		          </div>
+	          </div>
+	          <div class="modal-footer">
+	              <button type="submit" class="btn btn-success">Save</button>
+	          </div>
+	      </form>
+	  </div>
+	</div>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+	      <form class="form" role="form" method="post" action="/chapter/delete">
+	          <div class="modal-body">
+	              <div>
+	                <h1 class="logo">
+	                  <span class="logo-title">StoryCrush</span>
+	                  <span class="small pull-right">Delete Chapter</span>
+	                </h1><!--//logo--> 
+	                <hr>
+	              </div>
+	              <div class="row">
+	              	<h3>Are you sure you want to delete this chapter?</h3>
+                  	<input type="hidden" name="storyId" value="<%-story.id%>">
+                  	<input type="hidden" name="name" value="<%-story.name%>">
+                  	<input type="hidden" name="number" value="<%-chapter.number%>">
+	              </div>
+	          </div>
+              <div class="modal-footer">
+              	<button type="button" class="btn btn-cta btn-cta-tertiary pull-left" data-dismiss="modal">No</button>
+				<button type="submit" class="btn btn-cta-primary pull-right">Yes</button>
+              </div>
+          </form>
+      </div>
+  	</div>
+</div>

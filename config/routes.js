@@ -84,7 +84,9 @@ module.exports.routes = {
 
   /***** CHAPTER CONTROLLER *****/
 
-  '/chapters/create' : 'ChapterController.create',
+  '/chapter/read' : 'ChapterController.read',
+
+
 
   // '/chapter/view' : {
   //   view: 'main/chapter',

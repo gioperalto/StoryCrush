@@ -273,14 +273,24 @@ var StoryController = {
 		    		// The error object sent below is converted to JSON
 		    		res.send(500, { error: "DB Error" });
 				} else if(stry) {
-					Story.destroy({name: name})
-					.exec(function deleteDeleteStory(error, story) {
-						if(error) {
+					Chapter.destroy({
+						story_id: stry.id
+					}).exec(function deleteDeleteChapters(errr) {
+						if(errr) {
 							// Set the error header
 		        			res.set('error', 'DB Error');
 		        			res.send(500, { error: "DB Error" });
 						} else {
-							res.send(story);
+							Story.destroy({name: name})
+							.exec(function deleteDeleteStory(error) {
+								if(error) {
+									// Set the error header
+				        			res.set('error', 'DB Error');
+				        			res.send(500, { error: "DB Error" });
+								} else {
+									res.redirect('/publish');
+								}
+							});
 						}
 					});
 				} else {

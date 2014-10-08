@@ -104,7 +104,7 @@ var ChapterController = {
 	update: function(req, res) {
 		var storyId 		= req.param('storyId'),
 			chapterId 		= req.param('chapterId'),
-			name 			= req.param('storyName'),
+			name 			= req.param('chapterName'),
 			content 		= req.param('content');
 
 		Chapter.findOne({

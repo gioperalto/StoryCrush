@@ -9,7 +9,8 @@
     "optimist": "0.3.4",
     "sails": "0.9.16",
     "sails-disk": "~0.9.0",
-    "skipper": "^0.5.3"
+    "skipper": "^0.5.3",
+    "newrelic":"1.11.5"
   },
   "scripts": {
     "start": "node app.js",
